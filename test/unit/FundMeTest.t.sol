@@ -77,19 +77,12 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = owner.balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            endingOwnerBalance,
-            startingOwnerBalance + startingFundMeBalance
-        );
+        assertEq(endingOwnerBalance, startingOwnerBalance + startingFundMeBalance);
     }
 
     function testfundWithMultipleFunders() public {
         uint160 numberOfFounders = 10;
-        for (
-            uint160 startingIndex = 1;
-            startingIndex < numberOfFounders;
-            startingIndex++
-        ) {
+        for (uint160 startingIndex = 1; startingIndex < numberOfFounders; startingIndex++) {
             address funder = address(startingIndex);
             hoax(funder, STARTING_BALANCE);
             fundMe.fund{value: SEND_VALUE}();
